@@ -73,14 +73,14 @@ var renderBarChart = function(config) {
 
     var barHeight = 30;
     var barGap = 5;
-    var labelWidth = 85;
+    var labelWidth = 130;
     var labelMargin = 6;
     var valueGap = 6;
 
     var margins = {
         top: 0,
         right: 15,
-        bottom: 20,
+        bottom: 30,
         left: (labelWidth + labelMargin)
     };
 

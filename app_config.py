@@ -25,10 +25,10 @@ REPOSITORY_URL = 'git@github.com:thetylerloop/%s.git' % REPOSITORY_NAME
 REPOSITORY_ALT_URL = None   # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
 # Path to the folder containing the graphics
-GRAPHICS_PATH = os.path.abspath('../graphics')
+GRAPHICS_PATH = os.path.abspath('../graphics-thetylerloop')
 
 # Path to the folder containing the graphics
-ARCHIVE_GRAPHICS_PATH = os.path.abspath('../graphics-archive')
+ARCHIVE_GRAPHICS_PATH = os.path.abspath('../graphics-archive-thetylerloop')
 
 # Path to the graphic templates
 TEMPLATES_PATH = os.path.abspath('graphic_templates')
@@ -46,7 +46,7 @@ PYM = {
 CAREBOT
 """
 
-CAREBOT_ENABLED = True
+CAREBOT_ENABLED = False
 CAREBOT_URL = '//carebot.nprapps.org/carebot-tracker.v0.min.js'
 
 """
