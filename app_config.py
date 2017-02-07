@@ -4,6 +4,7 @@
 Project-wide application configuration.
 """
 
+import logging
 import os
 
 from authomatic.providers import oauth2
@@ -66,7 +67,11 @@ authomatic_config = {
     },
 }
 
-authomatic = Authomatic(authomatic_config, os.environ.get('AUTHOMATIC_SALT'))
+authomatic = Authomatic(
+    authomatic_config,
+    os.environ.get('AUTHOMATIC_SALT'),
+    logging_level=logging.ERROR
+)
 
 """
 DEPLOYMENT
