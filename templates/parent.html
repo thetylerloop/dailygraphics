@@ -136,7 +136,7 @@
         </div>
 
         <div class="segment">
-            <a id="resize-desktop" class="btn" href="#">Desktop (730px)</a>
+            <a id="resize-desktop" class="btn" href="#">Desktop (640px)</a>
         </div>
 
         <div class="segment">
@@ -154,13 +154,13 @@
 
                 {% if DEPLOYMENT_TARGET != 'staging' %}
                 <div class="segment">
-                    <a class="btn staging" href="//stage-apps.npr.org/dailygraphics/graphics/{{ slug }}/" target="_blank">staging &raquo;</a>
+                    <a class="btn staging" href="https://stage-data.thetylerloop.com/dailygraphics/graphics/{{ slug }}/" target="_blank">staging &raquo;</a>
                 </div>
                 {% endif %}
 
                 {% if DEPLOYMENT_TARGET != 'production' %}
                 <div class="segment">
-                    <a class="btn production" href="https://apps.npr.org/dailygraphics/graphics/{{ slug }}/" target="_blank">production &raquo;</a>
+                    <a class="btn production" href="https://data.thetylerloop.com/dailygraphics/graphics/{{ slug }}/" target="_blank">production &raquo;</a>
                 </div>
                 {% endif %}
 
@@ -182,59 +182,19 @@
             </div>
         </div>
 
-        <h2><span class="production">Production</span> embed code (for Seamus)</h2>
+        <h2><span class="production">Production</span> embed code for Wordpress</h2>
 
 <!-- textarea contents -->
-    <textarea readonly="readonly" rows="10" cols="50">
-<div id="responsive-embed-{{ slug }}"></div>
-<script type=text/javascript>
-    (function(jQuery) {
-        if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
-            // add randomness to id to support for multiple graphic instances in one story
-            var el = document.getElementById("responsive-embed-{{slug}}");
-            el.id = el.id + "-" + Math.random().toString(36).substr(2,5);
-            jQuery.getScript("{{ PYM['pym_url'] }}").done(function () {
-                jQuery(function () { // Wait for page load
-                    var pymParent = new pym.Parent(
-                        el.id,
-                        '//apps.npr.org/dailygraphics/graphics/{{ slug }}/child.html',
-                        {}
-                    );
-{% if CAREBOT_ENABLED %}
-                    jQuery.getScript("{{ CAREBOT_URL }}").done(function () {
-                        var tracker = new CarebotTracker.VisibilityTracker(el.id, function(result) {
-                            // Ignore Carebot events to empty embeds, keeps listening after unloading the page
-                            if (pymParent.el.getElementsByTagName('iframe').length !== 0) {
-                                pymParent.sendMessage('on-screen', result.bucket);
-                            }
-                        });
-                        // Check if there is already an scroll tracker somewhere on the page
-                        if (!document.querySelector("[data-carebot-scroll]")) {
-                            pymParent.el.setAttribute("data-carebot-scroll", "");
-                            var scrollTracker = new CarebotTracker.ScrollTracker('storytext', function(percent, seconds) {
-                                // Ignore Carebot events to empty embeds, keeps listening after unloading the page
-                                if (pymParent.el.getElementsByTagName('iframe').length !== 0) {
-                                    pymParent.sendMessage('scroll-depth', JSON.stringify({percent: percent,seconds: seconds}));
-                                }
-                            });
-                        }
-                    });
-{% endif %}
-                });
-            });
-        } else {
-            console.error('could not load graphic: jQuery is not on the page.');
-        }
-    })(window.jQuery);
-</script>
+    <textarea readonly="readonly" rows="3" cols="100">
+[pym src="https://data.thetylerloop.com/dailygraphics/graphics/{{ slug }}/child.html"]
     </textarea>
 <!-- end textarea contents -->
 
-        <h2><span class="production">Production</span> autoinit embed code (<a href="http://blog.apps.npr.org/2014/12/19/pym-core-publisher.html">for member stations</a>)</h2>
+        <h2><span class="staging">Staging</span> embed code for Wordpress</h2>
 
 <!-- textarea contents -->
-    <textarea readonly="readonly" rows="10" cols="50">
-<p data-pym-src="//{{ PRODUCTION_S3_BUCKET['bucket_name'] }}/{{ PROJECT_SLUG }}/graphics/{{ slug }}/child.html">Loading...</p><script src="{{PYM['pym_loader_url']}}" type="text/javascript"></script>
+    <textarea readonly="readonly" rows="3" cols="100">
+[pym src="https://stage-data.thetylerloop.com/dailygraphics/graphics/{{ slug }}/child.html"]
     </textarea>
 <!-- end textarea contents -->
 
@@ -273,7 +233,7 @@
         resizeDesktopEl.addEventListener('click', function(e) {
             e.preventDefault();
 
-            previewWrapperEl.style.width = '730px';
+            previewWrapperEl.style.width = '640px';
             pymParent.sendWidth();
 
             window.location.hash = 'desktop';
@@ -293,7 +253,7 @@
         } else if (window.location.hash == '#mobile') {
             previewWrapperEl.style.width = '300px';
         } else if (window.location.hash == '#desktop') {
-            previewWrapperEl.style.width = '730px';
+            previewWrapperEl.style.width = '640px';
         } else if (window.location.hash == '#fluid') {
             previewWrapperEl.style.width = '100%';
         }
