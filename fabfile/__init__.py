@@ -514,7 +514,7 @@ def copy_spreadsheet(slug):
         'method': 'POST',
         'headers': {'Content-Type': 'application/json'},
         'body': json.dumps({
-            'title': '%s GRAPHIC COPY' % slug,
+            'title': '%s GRAPHIC COPY' % slug
         }),
     }
 

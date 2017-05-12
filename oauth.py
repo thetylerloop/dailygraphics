@@ -10,7 +10,9 @@ from flask import Blueprint, make_response, redirect, render_template, url_for
 from functools import wraps
 from render_utils import load_graphic_config, make_context
 
-SPREADSHEET_URL_TEMPLATE = 'https://docs.google.com/feeds/download/spreadsheets/Export?exportFormat=xlsx&key=%s'
+# Via: https://developers.google.com/drive/v3/reference/files/export
+# and: https://developers.google.com/drive/v3/web/manage-downloads
+DRIVE_API_EXPORT_TEMPLATE = 'https://www.googleapis.com/drive/v3/files/%s/export?mimeType=%s'
 
 oauth = Blueprint('_oauth', __name__)
 
@@ -110,12 +112,12 @@ def save_credentials(credentials):
     with open(file_path, 'w') as f:
         f.write(credentials.serialize())
 
-def get_document(key, file_path):
+def get_document(key, file_path, mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'):
     """
     Uses Authomatic to get the google doc
     """
     credentials = get_credentials()
-    url = SPREADSHEET_URL_TEMPLATE % key
+    url = DRIVE_API_EXPORT_TEMPLATE % (key, mimeType)
     response = app_config.authomatic.access(credentials, url)
 
     if response.status != 200:
