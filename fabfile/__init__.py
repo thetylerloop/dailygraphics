@@ -134,7 +134,7 @@ def deploy_single(slug):
         )
 
     print ''
-    print '%s URL: %s/graphics/%s/' % (env.settings.capitalize(), app_config.S3_BASE_URL, slug)
+    print '%s URL: https:%s/graphics/%s/' % (env.settings.capitalize(), app_config.S3_BASE_URL, slug)
 
 def download_copy(slug):
     """
