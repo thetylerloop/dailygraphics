@@ -458,8 +458,8 @@ def _check_credentials():
             with open(os.devnull, 'w') as fnull:
                 print 'Credentials were not found or permissions were not correct. Automatically opening a browser to authenticate with Google.'
                 gunicorn = find_executable('gunicorn')
-                process = subprocess.Popen([gunicorn, '-b', '127.0.0.1:8888', 'app:wsgi_app'], stdout=fnull, stderr=fnull)
-                webbrowser.open_new('http://127.0.0.1:8888/oauth')
+                process = subprocess.Popen([gunicorn, '-b', '127.0.0.1:8000', 'app:wsgi_app'], stdout=fnull, stderr=fnull)
+                webbrowser.open_new('http://127.0.0.1:8000/oauth')
                 print 'Waiting...'
                 while not credentials:
                     try:
