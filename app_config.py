@@ -26,7 +26,7 @@ REPOSITORY_URL = 'git@github.com:thetylerloop/%s.git' % REPOSITORY_NAME
 REPOSITORY_ALT_URL = None   # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
 # Path to the folder containing the graphics
-GRAPHICS_PATH = os.path.abspath('../graphics-thetylerloop')
+GRAPHICS_PATH = os.path.abspath('../graphics')
 
 # Path to the folder containing the graphics
 ARCHIVE_GRAPHICS_PATH = os.path.abspath('../graphics-archive-thetylerloop')
